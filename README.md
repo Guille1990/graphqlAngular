@@ -5,10 +5,10 @@ Esta es una pequeña implementación de GraphQL y Angular, por supuesto con Apol
 
 ### Requisitos
 
-**1.** Instalar una versión actual de NodeJS
-**2.** Instalar el [cli](https://cli.angular.io/) de angular
-**3.** Ingresar a la carpeta graphqlCrud (front) y ejecutar el comando "npm install"
-**4.** Ingresar a la carpeta server-graphql (back) y ejecutar el comando "npm install"
+1. Instalar una versión actual de NodeJS
+2. Instalar el [cli](https://cli.angular.io/) de angular
+3. Ingresar a la carpeta graphqlCrud (front) y ejecutar el comando "npm install"
+4. Ingresar a la carpeta server-graphql (back) y ejecutar el comando "npm install"
 
 ## Iniciar front
 
