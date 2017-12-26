@@ -13,6 +13,10 @@ const rootQuerys = `
     userAdd(user: newUser): User
     userUpdate(id: Int!, user: updateUser): User
   }
+
+  type Subscription {
+    userAdded: User
+  }
 `
 
 const schema = makeExecutableSchema({
