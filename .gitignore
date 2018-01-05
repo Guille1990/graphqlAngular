@@ -2,3 +2,4 @@
 
 graphqlCrud/node_modules
 server-graphql/node_modules
+server-graphql/data/main.db

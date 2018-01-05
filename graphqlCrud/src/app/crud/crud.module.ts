@@ -12,6 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Ng2Rut } from 'ng2-rut';
 import { SpinnerService } from './services/spinner.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
 
 @NgModule({
   imports: [
@@ -42,8 +45,28 @@ export class CrudModule {
     apollo: Apollo,
     httpLink: HttpLink
   ) {
+    const http = httpLink.create({
+      uri: 'http://localhost:1234/graphql'
+    });
+
+    const ws = new WebSocketLink({
+      uri: 'ws://localhost:1234/subscriptions',
+      options: {
+        reconnect: true
+      }
+    });
+
+    const link = split(
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query)
+        return kind === 'OperationDefinition' && operation === 'subscription';
+      },
+      ws,
+      http
+    );
+
     apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:1234/graphql' }),
+      link,
       cache: new InMemoryCache()
     });
   }
