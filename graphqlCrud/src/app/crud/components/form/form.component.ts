@@ -103,7 +103,6 @@ export class FormComponent implements OnInit {
       variables: this.userUpdate ? variablesUpdate : variablesAdd
     }).subscribe(
       res => {
-        console.log(res);
         this.spinnerService.closeSpinner();
         this.router.navigate(['/list']);
       },

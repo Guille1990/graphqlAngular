@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
+
+const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
+const USERS_SUBSCRIPTION = gql`subscription test { userAdded { id, rut, name, lastName, mail } }`;
 
 @Component({
   selector: 'app-list',
@@ -18,6 +22,9 @@ export class ListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  public usersQuery: QueryRef<any>;
+  public usersObservable: Observable<any>;
+
   public displayColumns = [
     'actions',
     'id',
@@ -30,13 +37,20 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private apollo: Apollo,
     private router: Router
-  ) { }
+  ) {
+    this.usersQuery = this.apollo.watchQuery({
+      query: USERS_QUERY
+    });
+
+    this.usersObservable = this.usersQuery.valueChanges;
+  }
 
   ngOnInit() {
-    this.subscription = this.apollo.query({ query: gql`{ users { id, rut, name, lastName, mail } }` })
+    this.subscribeToMore();
+
+    this.subscription = this.apollo.query({ query: USERS_QUERY })
       .subscribe(
         res => {
-          console.log(res.data['users']);
           this.dataSource = new MatTableDataSource<User>(res.data['users']);
           this.dataSource.paginator = this.paginator;
         }, err => {
@@ -53,5 +67,21 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnDestroy () {
     console.log('entre al onDestroy');
     this.subscription.unsubscribe();
+  }
+
+  subscribeToMore () {
+    this.usersQuery.subscribeToMore({
+      document: USERS_SUBSCRIPTION,
+      variables: {},
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log(prev, subscriptionData);
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        return prev;
+        // const userAdded = subscriptionData.data['userAdded'];
+      }
+    });
   }
 }

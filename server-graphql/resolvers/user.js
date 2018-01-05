@@ -19,7 +19,12 @@ const resolvers = {
     })
   },
   Subscription: {
-    userAdded: () => pubsub.asyncIterator(USER_ADDED_TOPIC)
+    userAdded: {
+      subscribe: () => {
+        console.log('Entre al evento')
+        return pubsub.asyncIterator(USER_ADDED_TOPIC) 
+      }
+    }
   }
 }
 
