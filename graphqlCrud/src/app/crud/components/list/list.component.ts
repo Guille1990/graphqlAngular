@@ -79,8 +79,8 @@ export class ListComponent implements OnInit, OnDestroy {
           return prev;
         }
 
-        return prev;
-        // const userAdded = subscriptionData.data['userAdded'];
+        const userAdded = subscriptionData.data['userAdded'];
+        return Object.assign({}, prev, { users: [ userAdded, ...prev['users'] ] })
       }
     });
   }
