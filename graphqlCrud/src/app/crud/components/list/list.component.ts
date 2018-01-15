@@ -7,6 +7,14 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
+export interface User {
+  id: number;
+  rut: string;
+  name: string;
+  lastName: string;
+  mail: string;
+}
+
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
 const USERS_SUBSCRIPTION = gql`subscription test { userAdded { id, rut, name, lastName, mail } }`;
 
@@ -37,25 +45,24 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private apollo: Apollo,
     private router: Router
-  ) {
-    this.usersQuery = this.apollo.watchQuery({
+  ) { }
+
+  ngOnInit() {
+    this.usersQuery = this.apollo.watchQuery<User[]>({
       query: USERS_QUERY
     });
 
     this.usersObservable = this.usersQuery.valueChanges;
-  }
 
-  ngOnInit() {
     this.subscribeToMore();
 
-    this.subscription = this.apollo.query({ query: USERS_QUERY })
-      .subscribe(
-        res => {
-          this.dataSource = new MatTableDataSource<User>(res.data['users']);
-          this.dataSource.paginator = this.paginator;
-        }, err => {
-          console.log(err);
-        });
+    this.subscription = this.usersObservable.subscribe(
+      res => {
+        this.dataSource = new MatTableDataSource<User>(res.data['users']);
+        this.dataSource.paginator = this.paginator;
+      }, err => {
+        console.log(err);
+      });
   }
 
   edit (user: User) {
@@ -66,7 +73,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy () {
     console.log('entre al onDestroy');
-    this.subscription.unsubscribe();
   }
 
   subscribeToMore () {
@@ -74,13 +80,13 @@ export class ListComponent implements OnInit, OnDestroy {
       document: USERS_SUBSCRIPTION,
       variables: {},
       updateQuery: (prev, { subscriptionData }) => {
-        console.log(prev, subscriptionData);
         if (!subscriptionData.data) {
           return prev;
         }
 
         const userAdded = subscriptionData.data['userAdded'];
-        return Object.assign({}, prev, { users: [ userAdded, ...prev['users'] ] })
+
+        return { users: [ userAdded, ...prev['users'] ] };
       }
     });
   }
