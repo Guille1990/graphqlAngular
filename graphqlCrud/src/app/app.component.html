@@ -1,5 +1,6 @@
 <mat-toolbar color="accent" class="my-toolbar">
-  <span>Hola</span>
+  <button mat-raised-button color="accent" [routerLink]="['/list']">lista</button>
+  <button mat-raised-button color="accent" [routerLink]="['/add']">Formulario</button>
 </mat-toolbar>
 <div class="container">
   <router-outlet></router-outlet>

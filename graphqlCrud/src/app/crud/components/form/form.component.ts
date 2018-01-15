@@ -5,6 +5,8 @@ import { RutValidator, RutDirective } from 'ng2-rut';
 import { SpinnerService } from '../../services/spinner.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material';
 import gql from 'graphql-tag';
 
 @Component({
@@ -26,7 +28,8 @@ export class FormComponent implements OnInit {
     private rv: RutValidator,
     private spinnerService: SpinnerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -104,7 +107,9 @@ export class FormComponent implements OnInit {
     }).subscribe(
       res => {
         this.spinnerService.closeSpinner();
-        this.router.navigate(['/list']);
+        this.dialog.open(DialogComponent, {
+          width: '500px'
+        });
       },
       err => {
         console.log(err);

@@ -48,6 +48,7 @@ export class ListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('Entre al onInit');
     this.usersQuery = this.apollo.watchQuery<User[]>({
       query: USERS_QUERY
     });

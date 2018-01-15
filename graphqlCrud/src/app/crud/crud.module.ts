@@ -15,6 +15,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   imports: [
@@ -31,10 +32,12 @@ import { getMainDefinition } from 'apollo-utilities';
   declarations: [
     ListComponent,
     FormComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DialogComponent
   ],
   entryComponents: [
-    SpinnerComponent
+    SpinnerComponent,
+    DialogComponent
   ],
   providers: [
     SpinnerService
