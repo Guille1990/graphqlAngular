@@ -16,6 +16,7 @@ const rootQuerys = `
 
   type Subscription {
     userAdded: User
+    userUpdated: User
   }
 `
 

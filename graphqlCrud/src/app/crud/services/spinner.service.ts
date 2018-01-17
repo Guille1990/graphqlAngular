@@ -14,7 +14,7 @@ export class SpinnerService {
   openSpinner () {
     return this.dialogRef = this.dialog.open(SpinnerComponent, {
       width: '250px',
-      panelClass: 'spinnerPanel'
+      panelClass: 'dialogPanel'
     });
   }
 

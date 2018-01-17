@@ -16,7 +16,8 @@ export interface User {
 }
 
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
-const USERS_SUBSCRIPTION = gql`subscription test { userAdded { id, rut, name, lastName, mail } }`;
+const USERS_ADDED_SUBSCRIPTION = gql`subscription added { userAdded { id, rut, name, lastName, mail } }`;
+const USERS_UPDATED_SUBSCRIPTION = gql`subscription updated { userUpdated { id, rut, name, lastName, mail } }`;
 
 @Component({
   selector: 'app-list',
@@ -55,7 +56,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
     this.usersObservable = this.usersQuery.valueChanges;
 
-    this.subscribeToMore();
+    this.userAddedSubscribeToMore();
+    this.userUpdatedSubscribeToMore();
 
     this.subscription = this.usersObservable.subscribe(
       res => {
@@ -67,18 +69,16 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   edit (user: User) {
-    console.log(user);
-    localStorage.setItem('userEdit', JSON.stringify(user));
-    this.router.navigate(['/edit']);
+    this.router.navigate(['/userupdate', user.id]);
   }
 
   ngOnDestroy () {
     console.log('entre al onDestroy');
   }
 
-  subscribeToMore () {
+  userAddedSubscribeToMore () {
     this.usersQuery.subscribeToMore({
-      document: USERS_SUBSCRIPTION,
+      document: USERS_ADDED_SUBSCRIPTION,
       variables: {},
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) {
@@ -89,6 +89,13 @@ export class ListComponent implements OnInit, OnDestroy {
 
         return { users: [ userAdded, ...prev['users'] ] };
       }
+    });
+  }
+
+  userUpdatedSubscribeToMore () {
+    this.usersQuery.subscribeToMore({
+      document: USERS_UPDATED_SUBSCRIPTION,
+      variables: {}
     });
   }
 }

@@ -5,8 +5,8 @@ import { FormComponent } from '../components/form/form.component';
 
 const ROUTES: Routes = [
   { path: 'list', component: ListComponent },
-  { path: 'add', component: FormComponent },
-  { path: 'edit', component: FormComponent },
+  { path: 'useradd', component: FormComponent },
+  { path: 'userupdate/:id', component: FormComponent },
   { path: '**', pathMatch: 'full', redirectTo: '/list' }
 ];
 

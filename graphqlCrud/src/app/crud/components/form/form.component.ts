@@ -6,8 +6,19 @@ import { SpinnerService } from '../../services/spinner.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import gql from 'graphql-tag';
+import 'rxjs/Rx';
+
+const USER_QUERY = gql`query userQuery ($id: Int!) { 
+  user (id: $id) { 
+    id, 
+    rut, 
+    name, 
+    lastName, 
+    mail 
+  } 
+}`
 
 @Component({
   selector: 'app-form',
@@ -22,6 +33,7 @@ export class FormComponent implements OnInit {
   public form: FormGroup;
   public userAdd: User;
   public userUpdate: User;
+  public dialogRef: MatDialogRef<DialogComponent>;
 
   constructor(
     private apollo: Apollo,
@@ -48,14 +60,11 @@ export class FormComponent implements OnInit {
       ])
     });
 
-    this.userUpdate = JSON.parse(localStorage.getItem('userEdit'));
+    let userId = this.route.snapshot.paramMap.get('id');
 
-    if (this.userUpdate) {
-      this.setFormControl(this.userUpdate);
-      this.form.controls['rutCtrl'].disable();
+    if (userId) {
+      this.getUser(userId);
     }
-
-    localStorage.removeItem('userEdit');
   }
 
   submit () {
@@ -107,8 +116,13 @@ export class FormComponent implements OnInit {
     }).subscribe(
       res => {
         this.spinnerService.closeSpinner();
-        this.dialog.open(DialogComponent, {
-          width: '500px'
+        this.cleanForm()
+        this.dialogRef = this.dialog.open(DialogComponent, {
+          panelClass: 'dialogPanel'
+        });
+
+        this.dialogRef.afterClosed().toPromise().then(res => {
+          this.router.navigateByUrl('/list');
         });
       },
       err => {
@@ -118,11 +132,31 @@ export class FormComponent implements OnInit {
     );
   }
 
+  getUser (id) {
+    this.apollo.watchQuery<any>({
+      query: USER_QUERY,
+      variables: {
+        id
+      }
+    })
+    .valueChanges
+    .subscribe(({ data }) => {
+      this.userUpdate = data.user
+      this.setFormControl(this.userUpdate);
+      this.form.controls['rutCtrl'].disable();
+    });
+  }
+
   setFormControl (user: User) {
     this.form.controls['rutCtrl'].setValue(user.rut);
     this.form.controls['nameCtrl'].setValue(user.name);
     this.form.controls['lastNameCtrl'].setValue(user.lastName);
     this.form.controls['mailCtrl'].setValue(user.mail);
+  }
+
+  cleanForm () {
+    this.form.reset();
+    this.form.markAsUntouched();
   }
 
 }
