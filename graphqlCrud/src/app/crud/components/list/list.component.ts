@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 export interface User {
   id: number;
@@ -18,6 +19,8 @@ export interface User {
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
 const USERS_ADDED_SUBSCRIPTION = gql`subscription added { userAdded { id, rut, name, lastName, mail } }`;
 const USERS_UPDATED_SUBSCRIPTION = gql`subscription updated { userUpdated { id, rut, name, lastName, mail } }`;
+const USER_DELETED = gql`mutation userDelete($id: Int!) { userDelete(id: $id) { id, rut, name, lastName, mail } }`;
+const USER_DELETED_SUBSCRIPTION = gql`subscription deleted { userDeleted { id, rut, name, lastName, mail } }`;
 
 @Component({
   selector: 'app-list',
@@ -29,7 +32,6 @@ export class ListComponent implements OnInit, OnDestroy {
   public users: User[];
   public dataSource: MatTableDataSource<User>;
   private subscription: Subscription;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public usersQuery: QueryRef<any>;
   public usersObservable: Observable<any>;
@@ -49,7 +51,9 @@ export class ListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log('Entre al onInit');
+    this.dataSource = new MatTableDataSource<User>([]);
+    this.dataSource.paginator = this.paginator;
+
     this.usersQuery = this.apollo.watchQuery<User[]>({
       query: USERS_QUERY
     });
@@ -58,22 +62,37 @@ export class ListComponent implements OnInit, OnDestroy {
 
     this.userAddedSubscribeToMore();
     this.userUpdatedSubscribeToMore();
+    this.userDeletedSubscribeToMore();
 
     this.subscription = this.usersObservable.subscribe(
       res => {
-        this.dataSource = new MatTableDataSource<User>(res.data['users']);
-        this.dataSource.paginator = this.paginator;
+        this.setDataTable(res.data['users']);
       }, err => {
         console.log(err);
       });
+  }
+
+  setDataTable (data: User[]) {
+    this.dataSource = new MatTableDataSource<User>(data);
   }
 
   edit (user: User) {
     this.router.navigate(['/userupdate', user.id]);
   }
 
+  delete (user: User) {
+    this.apollo.mutate({
+      mutation: USER_DELETED,
+      variables: {
+        id: user.id
+      }
+    }).subscribe(res => {
+      const data = Object.assign([], this.users);
+    });
+  }
+
   ngOnDestroy () {
-    console.log('entre al onDestroy');
+    this.subscription.unsubscribe();
   }
 
   userAddedSubscribeToMore () {
@@ -96,6 +115,26 @@ export class ListComponent implements OnInit, OnDestroy {
     this.usersQuery.subscribeToMore({
       document: USERS_UPDATED_SUBSCRIPTION,
       variables: {}
+    });
+  }
+
+  userDeletedSubscribeToMore () {
+    this.usersQuery.subscribeToMore({
+      document: USER_DELETED_SUBSCRIPTION,
+      variables: {},
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const userDeleted = subscriptionData.data['userDeleted'];
+
+        const newData = prev['users'].filter(usr => {
+          return usr.id !== userDeleted.id;
+        });
+
+        return { users: [ ...newData ] };
+      }
     });
   }
 }

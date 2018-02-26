@@ -8,17 +8,18 @@ import { User } from '../../models/user';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import gql from 'graphql-tag';
-import 'rxjs/Rx';
 
-const USER_QUERY = gql`query userQuery ($id: Int!) { 
-  user (id: $id) { 
-    id, 
-    rut, 
-    name, 
-    lastName, 
-    mail 
-  } 
-}`
+
+const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
+const USER_QUERY = gql`query userQuery ($id: Int!) {
+  user (id: $id) {
+    id,
+    rut,
+    name,
+    lastName,
+    mail
+  }
+}`;
 
 @Component({
   selector: 'app-form',
@@ -60,7 +61,7 @@ export class FormComponent implements OnInit {
       ])
     });
 
-    let userId = this.route.snapshot.paramMap.get('id');
+    const userId = this.route.snapshot.paramMap.get('id');
 
     if (userId) {
       this.getUser(userId);
@@ -112,18 +113,24 @@ export class FormComponent implements OnInit {
 
     this.apollo.mutate({
       mutation: this.userUpdate ? updateUser : addUser,
-      variables: this.userUpdate ? variablesUpdate : variablesAdd
+      variables: this.userUpdate ? variablesUpdate : variablesAdd,
+      refetchQueries: [
+        { query: USERS_QUERY }
+      ]
     }).subscribe(
       res => {
         this.spinnerService.closeSpinner();
-        this.cleanForm()
+        this.cleanForm();
         this.dialogRef = this.dialog.open(DialogComponent, {
           panelClass: 'dialogPanel'
         });
 
-        this.dialogRef.afterClosed().toPromise().then(res => {
-          this.router.navigateByUrl('/list');
-        });
+        this.dialogRef
+          .afterClosed()
+          .toPromise()
+          .then(response => {
+            this.router.navigateByUrl('/list');
+          });
       },
       err => {
         console.log(err);
@@ -141,7 +148,7 @@ export class FormComponent implements OnInit {
     })
     .valueChanges
     .subscribe(({ data }) => {
-      this.userUpdate = data.user
+      this.userUpdate = data.user;
       this.setFormControl(this.userUpdate);
       this.form.controls['rutCtrl'].disable();
     });

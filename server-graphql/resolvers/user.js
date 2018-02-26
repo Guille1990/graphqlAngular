@@ -4,6 +4,7 @@ const { PubSub } = require('graphql-subscriptions')
 const pubsub = new PubSub()
 const USER_ADDED_TOPIC = 'newUser'
 const USER_UPDATED_TOPIC = 'updateUser'
+const USER_DELETED_TOPIC = 'deleteUser'
 
 const resolvers = {
   Query: {
@@ -20,19 +21,30 @@ const resolvers = {
         pubsub.publish(USER_UPDATED_TOPIC, { userUpdated: res.dataValues })
         return res.dataValues
       })
+    }),
+    userDelete: (_, args) => User.findById(args.id).then(async user => {
+      await user.destroy()
+      pubsub.publish(USER_DELETED_TOPIC, { userDeleted: user })
+      return user
     })
   },
   Subscription: {
     userAdded: {
       subscribe: () => {
         console.log('Entre al evento userAdded')
-        return pubsub.asyncIterator(USER_ADDED_TOPIC) 
+        return pubsub.asyncIterator(USER_ADDED_TOPIC)
       }
     },
     userUpdated: {
       subscribe: () => {
-        console.log('Entre al evento userAdded')
-        return pubsub.asyncIterator(USER_UPDATED_TOPIC) 
+        console.log('Entre al evento de actualización')
+        return pubsub.asyncIterator(USER_UPDATED_TOPIC)
+      }
+    },
+    userDeleted: {
+      subscribe: () => {
+        console.log('Entre al evento de eliminación')
+        return pubsub.asyncIterator(USER_DELETED_TOPIC)
       }
     }
   }
