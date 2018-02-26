@@ -1,0 +1,702 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>graphql-crud documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	    <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">graphql-crud documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="./index.html">graphql-crud documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./index.html"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a 
+                                         href="./overview.html" 
+                                        
+                                         href="./overview.html" 
+                                         class="active" >
+                                        <span class="fa fa-fw fa-th"></span>Overview
+                                    </a>
+                                </li>
+                                <li class="link">
+                                  <a href="./index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./dependencies.html"
+                                        
+                                        >
+                                        <span class="fa fa-fw fa-list"></span>Dependencies
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <div class="menu-toggler linked" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            >
+                                <span class="fa fa-fw fa-archive"></span>
+                                <span class="link-name">Modules</span>
+                                <span class="fa fa-angle-down"></span>
+                            </div>
+                        </a>
+                        <ul class="links collapse "
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="./modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/AppRouterModule.html" >AppRouterModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/CrudModule.html" >CrudModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/CrudRouterModule.html" >CrudRouterModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./modules/MaterialExportModule.html" >MaterialExportModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-components-links"
+                            >
+                            <span class="fa fa-fw fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="./components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/DialogComponent.html" >DialogComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/FormComponent.html" >FormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/ListComponent.html" >ListComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./components/SpinnerComponent.html" >SpinnerComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-injectables-links"
+                            >
+                            <span class="fa fa-fw fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="./injectables/SpinnerService.html" >SpinnerService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-interfaces-links"
+                            >
+                            <span class="fa fa-fw fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="./interfaces/User.html" >User</a>
+                                </li>
+                                <li class="link">
+                                    <a href="./interfaces/User.html" >User</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-miscellaneous-links"
+                            >
+                            <span class="fa fa-fw fa-cubes"></span>
+                            <span>Miscellaneous</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-miscellaneous-links"
+                            >
+                                <li class="link">
+                                  <a href="./miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./routes.html" ><span class="fa fa-fw fa-code-fork"></span>Routes</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                        <img src="./images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="./index.html">graphql-crud documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./index.html"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a 
+                                                href="./overview.html" 
+                                               
+                                                href="./overview.html" 
+                                                class="active" >
+                                               <span class="fa fa-fw fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="./index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./dependencies.html"
+                                               
+                                               >
+                                               <span class="fa fa-fw fa-list"></span>Dependencies
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <div class="menu-toggler linked" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   >
+                                       <span class="fa fa-fw fa-archive"></span>
+                                       <span class="link-name">Modules</span>
+                                       <span class="fa fa-angle-down"></span>
+                                   </div>
+                               </a>
+                               <ul class="links collapse "
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="./modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/AppRouterModule.html" >AppRouterModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/CrudModule.html" >CrudModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/CrudRouterModule.html" >CrudRouterModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./modules/MaterialExportModule.html" >MaterialExportModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#components-links"
+                   >
+                                   <span class="fa fa-fw fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="./components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/DialogComponent.html" >DialogComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/FormComponent.html" >FormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/ListComponent.html" >ListComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./components/SpinnerComponent.html" >SpinnerComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#injectables-links"
+                   >
+                                   <span class="fa fa-fw fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="./injectables/SpinnerService.html" >SpinnerService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#interfaces-links"
+                   >
+                                   <span class="fa fa-fw fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="./interfaces/User.html" >User</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="./interfaces/User.html" >User</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#miscellaneous-links"
+                   >
+                                   <span class="fa fa-fw fa-cubes"></span>
+                                   <span>Miscellaneous</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="miscellaneous-links"
+                   >
+                                       <li class="link">
+                                         <a href="./miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./routes.html" ><span class="fa fa-fw fa-code-fork"></span>Routes</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                               <img src="./images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
+               </div>
+               <div class="content overview">
+                   <div class="content-data">
+
+
+<ol class="breadcrumb">
+    <li>Overview</li>
+</ol>
+            <div class="text-center module-graph-container">
+                <div id="module-graph-svg">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: dependencies Pages: 1 -->
+<svg width="1416pt" height="284pt"
+ viewBox="0.00 0.00 1416.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
+<title>dependencies</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-280 1412,-280 1412,4 -4,4"/>
+<text text-anchor="start" x="683.0091" y="-42.4" font-family="sans-serif" font-weight="bold" font-size="14.00" fill="#000000">Legend</text>
+<polygon fill="#ffffb3" stroke="transparent" points="470,-10 470,-30 490,-30 490,-10 470,-10"/>
+<text text-anchor="start" x="493.629" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Declarations</text>
+<polygon fill="#8dd3c7" stroke="transparent" points="583,-10 583,-30 603,-30 603,-10 583,-10"/>
+<text text-anchor="start" x="606.7251" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Module</text>
+<polygon fill="#80b1d3" stroke="transparent" points="669,-10 669,-30 689,-30 689,-10 669,-10"/>
+<text text-anchor="start" x="692.7812" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Bootstrap</text>
+<polygon fill="#fdb462" stroke="transparent" points="766,-10 766,-30 786,-30 786,-10 766,-10"/>
+<text text-anchor="start" x="789.6732" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Providers</text>
+<polygon fill="#fb8072" stroke="transparent" points="862,-10 862,-30 882,-30 882,-10 862,-10"/>
+<text text-anchor="start" x="885.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
+<g id="clust1" class="cluster">
+<title>cluster_AppModule</title>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="8,-70 8,-268 455,-268 455,-70 8,-70"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_AppModule_declarations</title>
+<polygon fill="none" stroke="#000000" points="16,-78 16,-130 138,-130 138,-78 16,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_AppModule_imports</title>
+<polygon fill="none" stroke="#000000" points="146,-78 146,-130 447,-130 447,-78 146,-78"/>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_AppModule_bootstrap</title>
+<polygon fill="none" stroke="#000000" points="153,-208 153,-260 277,-260 277,-208 153,-208"/>
+</g>
+<g id="clust14" class="cluster">
+<title>cluster_CrudModule</title>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="463,-70 463,-195 1400,-195 1400,-70 463,-70"/>
+</g>
+<g id="clust15" class="cluster">
+<title>cluster_CrudModule_declarations</title>
+<polygon fill="none" stroke="#000000" points="863,-78 863,-130 1392,-130 1392,-78 863,-78"/>
+</g>
+<g id="clust20" class="cluster">
+<title>cluster_CrudModule_imports</title>
+<polygon fill="none" stroke="#000000" points="635,-78 635,-130 855,-130 855,-78 635,-78"/>
+</g>
+<g id="clust23" class="cluster">
+<title>cluster_CrudModule_providers</title>
+<polygon fill="none" stroke="#000000" points="471,-78 471,-130 627,-130 627,-78 471,-78"/>
+</g>
+<!-- AppComponent -->
+<g id="node1" class="node">
+<title>AppComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="129.9399,-122 24.0601,-122 24.0601,-86 129.9399,-86 129.9399,-122"/>
+<text text-anchor="middle" x="77" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent</text>
+</g>
+<!-- AppModule -->
+<g id="node2" class="node">
+<title>AppModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="256.6571,-187 253.6571,-191 232.6571,-191 229.6571,-187 173.3429,-187 173.3429,-151 256.6571,-151 256.6571,-187"/>
+<text text-anchor="middle" x="215" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppModule</text>
+</g>
+<!-- AppComponent&#45;&gt;AppModule -->
+<g id="edge1" class="edge">
+<title>AppComponent&#45;&gt;AppModule</title>
+<path fill="none" stroke="#000000" d="M77,-122.1061C77,-141.3391 77,-169 77,-169 77,-169 163.221,-169 163.221,-169"/>
+<polygon fill="#000000" stroke="#000000" points="163.221,-172.5001 173.221,-169 163.2209,-165.5001 163.221,-172.5001"/>
+</g>
+<!-- AppComponent  -->
+<g id="node5" class="node">
+<title>AppComponent </title>
+<polygon fill="#80b1d3" stroke="#000000" points="269.439,-252 160.561,-252 160.561,-216 269.439,-216 269.439,-252"/>
+<text text-anchor="middle" x="215" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent </text>
+</g>
+<!-- AppModule&#45;&gt;AppComponent  -->
+<g id="edge4" class="edge">
+<title>AppModule&#45;&gt;AppComponent </title>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M215,-187.1061C215,-187.1061 215,-205.991 215,-205.991"/>
+<polygon fill="#000000" stroke="#000000" points="211.5001,-205.9909 215,-215.991 218.5001,-205.991 211.5001,-205.9909"/>
+</g>
+<!-- AppRouterModule -->
+<g id="node3" class="node">
+<title>AppRouterModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="275.759,-122 272.759,-126 251.759,-126 248.759,-122 154.241,-122 154.241,-86 275.759,-86 275.759,-122"/>
+<text text-anchor="middle" x="215" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppRouterModule</text>
+</g>
+<!-- AppRouterModule&#45;&gt;AppModule -->
+<g id="edge2" class="edge">
+<title>AppRouterModule&#45;&gt;AppModule</title>
+<path fill="none" stroke="#000000" d="M215,-122.1061C215,-122.1061 215,-140.991 215,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="211.5001,-140.9909 215,-150.991 218.5001,-140.991 211.5001,-140.9909"/>
+</g>
+<!-- MaterialExportModule -->
+<g id="node4" class="node">
+<title>MaterialExportModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="438.5744,-122 435.5744,-126 414.5744,-126 411.5744,-122 293.4256,-122 293.4256,-86 438.5744,-86 438.5744,-122"/>
+<text text-anchor="middle" x="366" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">MaterialExportModule</text>
+</g>
+<!-- MaterialExportModule&#45;&gt;AppModule -->
+<g id="edge3" class="edge">
+<title>MaterialExportModule&#45;&gt;AppModule</title>
+<path fill="none" stroke="#000000" d="M341.8209,-122.0109C341.8209,-144.4852 341.8209,-180 341.8209,-180 341.8209,-180 266.8774,-180 266.8774,-180"/>
+<polygon fill="#000000" stroke="#000000" points="266.8774,-176.5001 256.8774,-180 266.8774,-183.5001 266.8774,-176.5001"/>
+</g>
+<!-- CrudModule -->
+<g id="node10" class="node">
+<title>CrudModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="900.5482,-187 897.5482,-191 876.5482,-191 873.5482,-187 813.4518,-187 813.4518,-151 900.5482,-151 900.5482,-187"/>
+<text text-anchor="middle" x="857" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">CrudModule</text>
+</g>
+<!-- MaterialExportModule&#45;&gt;CrudModule -->
+<g id="edge10" class="edge">
+<title>MaterialExportModule&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M390.1791,-122.1289C390.1791,-142.5724 390.1791,-173 390.1791,-173 390.1791,-173 803.0826,-173 803.0826,-173"/>
+<polygon fill="#000000" stroke="#000000" points="803.0827,-176.5001 813.0826,-173 803.0826,-169.5001 803.0827,-176.5001"/>
+</g>
+<!-- ListComponent -->
+<g id="node6" class="node">
+<title>ListComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1383.6109,-122 1280.3891,-122 1280.3891,-86 1383.6109,-86 1383.6109,-122"/>
+<text text-anchor="middle" x="1332" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ListComponent</text>
+</g>
+<!-- ListComponent&#45;&gt;CrudModule -->
+<g id="edge5" class="edge">
+<title>ListComponent&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M1332,-122.2921C1332,-144.2057 1332,-178 1332,-178 1332,-178 910.8354,-178 910.8354,-178"/>
+<polygon fill="#000000" stroke="#000000" points="910.8355,-174.5001 900.8354,-178 910.8354,-181.5001 910.8355,-174.5001"/>
+</g>
+<!-- FormComponent -->
+<g id="node7" class="node">
+<title>FormComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1262.6667,-122 1151.3333,-122 1151.3333,-86 1262.6667,-86 1262.6667,-122"/>
+<text text-anchor="middle" x="1207" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormComponent</text>
+</g>
+<!-- FormComponent&#45;&gt;CrudModule -->
+<g id="edge6" class="edge">
+<title>FormComponent&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M1207,-122.1061C1207,-141.3391 1207,-169 1207,-169 1207,-169 910.6201,-169 910.6201,-169"/>
+<polygon fill="#000000" stroke="#000000" points="910.6201,-165.5001 900.6201,-169 910.62,-172.5001 910.6201,-165.5001"/>
+</g>
+<!-- SpinnerComponent -->
+<g id="node8" class="node">
+<title>SpinnerComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1133.3809,-122 1008.6191,-122 1008.6191,-86 1133.3809,-86 1133.3809,-122"/>
+<text text-anchor="middle" x="1071" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SpinnerComponent</text>
+</g>
+<!-- SpinnerComponent&#45;&gt;CrudModule -->
+<g id="edge7" class="edge">
+<title>SpinnerComponent&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M1071,-122.027C1071,-138.3976 1071,-160 1071,-160 1071,-160 910.564,-160 910.564,-160"/>
+<polygon fill="#000000" stroke="#000000" points="910.5641,-156.5001 900.564,-160 910.564,-163.5001 910.5641,-156.5001"/>
+</g>
+<!-- DialogComponent -->
+<g id="node9" class="node">
+<title>DialogComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="990.9356,-122 871.0644,-122 871.0644,-86 990.9356,-86 990.9356,-122"/>
+<text text-anchor="middle" x="931" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">DialogComponent</text>
+</g>
+<!-- DialogComponent&#45;&gt;CrudModule -->
+<g id="edge8" class="edge">
+<title>DialogComponent&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M886.0281,-122.1061C886.0281,-122.1061 886.0281,-140.991 886.0281,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="882.5281,-140.9909 886.0281,-150.991 889.5281,-140.991 882.5281,-140.9909"/>
+</g>
+<!-- CrudRouterModule -->
+<g id="node11" class="node">
+<title>CrudRouterModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="846.6499,-122 843.6499,-126 822.6499,-126 819.6499,-122 721.3501,-122 721.3501,-86 846.6499,-86 846.6499,-122"/>
+<text text-anchor="middle" x="784" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CrudRouterModule</text>
+</g>
+<!-- CrudRouterModule&#45;&gt;CrudModule -->
+<g id="edge9" class="edge">
+<title>CrudRouterModule&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M830.0256,-122.1061C830.0256,-122.1061 830.0256,-140.991 830.0256,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="826.5257,-140.9909 830.0256,-150.991 833.5257,-140.991 826.5257,-140.9909"/>
+</g>
+<!-- Ng2Rut -->
+<g id="node12" class="node">
+<title>Ng2Rut</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="703.3347,-122 700.3347,-126 679.3347,-126 676.3347,-122 642.6653,-122 642.6653,-86 703.3347,-86 703.3347,-122"/>
+<text text-anchor="middle" x="673" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">Ng2Rut</text>
+</g>
+<!-- Ng2Rut&#45;&gt;CrudModule -->
+<g id="edge11" class="edge">
+<title>Ng2Rut&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M673,-122.0091C673,-138.0494 673,-159 673,-159 673,-159 803.3946,-159 803.3946,-159"/>
+<polygon fill="#000000" stroke="#000000" points="803.3946,-162.5001 813.3946,-159 803.3945,-155.5001 803.3946,-162.5001"/>
+</g>
+<!-- SpinnerService -->
+<g id="node13" class="node">
+<title>SpinnerService</title>
+<ellipse fill="#fdb462" stroke="#000000" cx="549" cy="-104" rx="70.0616" ry="18"/>
+<text text-anchor="middle" x="549" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SpinnerService</text>
+</g>
+<!-- SpinnerService&#45;&gt;CrudModule -->
+<g id="edge12" class="edge">
+<title>SpinnerService&#45;&gt;CrudModule</title>
+<path fill="none" stroke="#000000" d="M549,-122.2667C549,-140.5552 549,-166 549,-166 549,-166 803.1982,-166 803.1982,-166"/>
+<polygon fill="#000000" stroke="#000000" points="803.1982,-169.5001 813.1982,-166 803.1982,-162.5001 803.1982,-169.5001"/>
+</g>
+</g>
+</svg>
+
+                </div>
+                <i id="fullscreen" class="fa fa-expand module-graph-fullscreen-btn" aria-hidden="true"></i>
+                <div class="btn-group">
+                    <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
+                    <button id="reset" class="btn btn-default btn-sm">Reset</button>
+                    <button id="zoom-out" class="btn btn-default btn-sm">Zoom out</button>
+                </div>
+            </div>
+<div class="container-fluid overview">
+    <div class="row">
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-archive"></span></h4>
+                        <p class="card-text">
+                            <a href="./modules.html">5 modules</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-cogs"></span></h4>
+                        <p class="card-text">5 components</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code-fork"></span></h4>
+                        <p class="card-text">1 injectable</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-info"></span></h4>
+                        <p class="card-text">2 interfaces</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title"><span class="fa fa-code-fork"></span></h4>
+                        <p class="card-text">
+                            <a href="./routes.html">10 routes</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<script src="js/libs/svg-pan-zoom.min.js"></script>
+<script src="js/svg-pan-zoom.controls.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+           </div>
+       </div>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script>var COMPODOC_CURRENT_PAGE_DEPTH = 0;</script>
+
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+       <script src="./js/search/search_index.js"></script>
+
+
+    </body>
+</html>

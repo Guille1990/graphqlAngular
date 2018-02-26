@@ -9,8 +9,40 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import gql from 'graphql-tag';
 
-
+/**
+ * Query para consultar por todos los usuarios
+ */
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
+
+/**
+ * Mutación para añadir usuarios
+ */
+const addUser = gql`
+  mutation addUser($user: newUser!) {
+    userAdd(user: $user) {
+      id
+      name
+      lastName
+    }
+  }
+`;
+
+/**
+ * Mutación para actualizar usuarios
+ */
+const updateUser = gql`
+  mutation updateUser($id: Int!, $user: updateUser) {
+    userUpdate(id: $id, user: $user) {
+      id
+      name
+      lastName
+    }
+  }
+`;
+
+/**
+ * Query para consultar usuarios por ID
+ */
 const USER_QUERY = gql`query userQuery ($id: Int!) {
   user (id: $id) {
     id,
@@ -21,6 +53,10 @@ const USER_QUERY = gql`query userQuery ($id: Int!) {
   }
 }`;
 
+/**
+ * @example
+ * <app-form></app-form>
+ */
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -76,26 +112,6 @@ export class FormComponent implements OnInit {
       lastName: this.form.controls['lastNameCtrl'].value,
       mail: this.form.controls['mailCtrl'].value
     };
-
-    const addUser = gql`
-      mutation addUser($user: newUser!) {
-        userAdd(user: $user) {
-          id
-          name
-          lastName
-        }
-      }
-    `;
-
-    const updateUser = gql`
-      mutation updateUser($id: Int!, $user: updateUser) {
-        userUpdate(id: $id, user: $user) {
-          id
-          name
-          lastName
-        }
-      }
-    `;
 
     const variablesAdd = { user: this.userAdd };
     let variablesUpdate;
