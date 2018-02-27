@@ -54,6 +54,12 @@ const USER_QUERY = gql`query userQuery ($id: Int!) {
 }`;
 
 /**
+ * Mensajes de actualización e inserción
+ */
+const MESSAGE_INSERT = 'Usuario agregado correctamente';
+const MESSAGE_UPDATE = 'Usuario actualizado correctamente';
+
+/**
  * @example
  * <app-form></app-form>
  */
@@ -167,7 +173,10 @@ export class FormComponent implements OnInit {
       res => {
         this.spinnerService.closeSpinner();
         this.dialogRef = this.dialog.open(DialogComponent, {
-          panelClass: 'dialogPanel'
+          panelClass: 'dialogPanel',
+          data: {
+            message: this.userUpdate ? MESSAGE_UPDATE : MESSAGE_INSERT
+          }
         });
 
         this.dialogRef
