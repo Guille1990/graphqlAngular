@@ -72,6 +72,15 @@ export class FormComponent implements OnInit {
   public userUpdate: User;
   public dialogRef: MatDialogRef<DialogComponent>;
 
+  /**
+   * Injección de dependencias
+   * @param apollo
+   * @param rv
+   * @param spinnerService
+   * @param router
+   * @param route
+   * @param dialog
+   */
   constructor(
     private apollo: Apollo,
     private rv: RutValidator,
@@ -82,6 +91,9 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    /**
+     * Creación de Reactive Forms
+     */
     this.form = new FormGroup({
       rutCtrl: new FormControl('', [
         Validators.required
@@ -97,6 +109,9 @@ export class FormComponent implements OnInit {
       ])
     });
 
+    /**
+     * Captura la id del usuario cuando se va a editar el objeto
+     */
     const userId = this.route.snapshot.paramMap.get('id');
 
     if (userId) {
@@ -104,8 +119,16 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /**
+   * Método que realiza inserción o actualización de
+   * objeto User
+   */
   submit () {
     this.spinnerService.openSpinner();
+
+    /**
+     * Se arma objeto que se va a insertar
+     */
     this.userAdd = {
       rut: this.form.controls['rutCtrl'].value,
       name: this.form.controls['nameCtrl'].value,
@@ -114,6 +137,10 @@ export class FormComponent implements OnInit {
     };
 
     const variablesAdd = { user: this.userAdd };
+
+    /**
+     * Objeto utilizado para actualizar un usuario
+     */
     let variablesUpdate;
 
     if (this.userUpdate) {
@@ -127,6 +154,9 @@ export class FormComponent implements OnInit {
       };
     }
 
+    /**
+     * Mutación que actualiza o inserta objeto.
+     */
     this.apollo.mutate({
       mutation: this.userUpdate ? updateUser : addUser,
       variables: this.userUpdate ? variablesUpdate : variablesAdd,
@@ -136,7 +166,6 @@ export class FormComponent implements OnInit {
     }).subscribe(
       res => {
         this.spinnerService.closeSpinner();
-        this.cleanForm();
         this.dialogRef = this.dialog.open(DialogComponent, {
           panelClass: 'dialogPanel'
         });
@@ -155,6 +184,10 @@ export class FormComponent implements OnInit {
     );
   }
 
+  /**
+   * Método utilizado para obtener a un user por la Id
+   * @param id
+   */
   getUser (id) {
     this.apollo.watchQuery<any>({
       query: USER_QUERY,
@@ -170,16 +203,14 @@ export class FormComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para setear valores de formulario
+   * @param user
+   */
   setFormControl (user: User) {
     this.form.controls['rutCtrl'].setValue(user.rut);
     this.form.controls['nameCtrl'].setValue(user.name);
     this.form.controls['lastNameCtrl'].setValue(user.lastName);
     this.form.controls['mailCtrl'].setValue(user.mail);
   }
-
-  cleanForm () {
-    this.form.reset();
-    this.form.markAsUntouched();
-  }
-
 }

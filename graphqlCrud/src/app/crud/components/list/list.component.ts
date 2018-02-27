@@ -5,9 +5,16 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import gql from 'graphql-tag';
-import { variable } from '@angular/compiler/src/output/output_ast';
 
+/**
+ * GraphQL tag se utiliza para poder definir las operaciones
+ * que queramos realizar en el servicio GraphQL (Querys, Mutation y Subscription)
+ */
+import gql from 'graphql-tag';
+
+/**
+ * Interfas de tipo de dato User
+ */
 export interface User {
   id: number;
   rut: string;
@@ -16,12 +23,32 @@ export interface User {
   mail: string;
 }
 
+/**
+ * Query de consulta de usuarios
+ */
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
+/**
+ * Suscripción a evento userAdded
+ */
 const USERS_ADDED_SUBSCRIPTION = gql`subscription added { userAdded { id, rut, name, lastName, mail } }`;
+/**
+ * Suscripción a evento userUpdated
+ */
 const USERS_UPDATED_SUBSCRIPTION = gql`subscription updated { userUpdated { id, rut, name, lastName, mail } }`;
+/**
+ * Mutación para eliminar usuario
+ */
 const USER_DELETED = gql`mutation userDelete($id: Int!) { userDelete(id: $id) { id, rut, name, lastName, mail } }`;
+/**
+ * Suscripción a evento userDeleted
+ */
 const USER_DELETED_SUBSCRIPTION = gql`subscription deleted { userDeleted { id, rut, name, lastName, mail } }`;
 
+
+/**
+ * @example
+ * <app-list></app-list>
+ */
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -45,6 +72,11 @@ export class ListComponent implements OnInit, OnDestroy {
     'mail'
   ];
 
+  /**
+   * Injección de dependencias
+   * @param apollo
+   * @param router
+   */
   constructor(
     private apollo: Apollo,
     private router: Router
@@ -52,34 +84,56 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<User>([]);
-    this.dataSource.paginator = this.paginator;
 
+    /**
+     * Observable que realiza consulta al servicio GraphQL,
+     * utiliza como parámetro la Query escrita en GQL
+     */
     this.usersQuery = this.apollo.watchQuery<User[]>({
       query: USERS_QUERY
     });
-
     this.usersObservable = this.usersQuery.valueChanges;
 
-    this.userAddedSubscribeToMore();
-    this.userUpdatedSubscribeToMore();
-    this.userDeletedSubscribeToMore();
-
+    /**
+     * Realiza petición al servidor para obtener la lista de
+     * usuarios
+     */
     this.subscription = this.usersObservable.subscribe(
       res => {
         this.setDataTable(res.data['users']);
       }, err => {
         console.log(err);
       });
+
+    /**
+     * Llamada a métodos de subscrición
+     */
+    this.userAddedSubscribeToMore();
+    this.userUpdatedSubscribeToMore();
+    this.userDeletedSubscribeToMore();
   }
 
+  /**
+   * Carga datos en la tabla
+   * @param data
+   */
   setDataTable (data: User[]) {
     this.dataSource = new MatTableDataSource<User>(data);
   }
 
+  /**
+   * Función para pasar al formulario de
+   * edición
+   * @param user
+   */
   edit (user: User) {
     this.router.navigate(['/userupdate', user.id]);
   }
 
+  /**
+   * Método para eliminar usuario
+   * @param user
+   */
   delete (user: User) {
     this.apollo.mutate({
       mutation: USER_DELETED,
@@ -95,6 +149,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Método para suscribirse a evento userAdded
+   */
   userAddedSubscribeToMore () {
     this.usersQuery.subscribeToMore({
       document: USERS_ADDED_SUBSCRIPTION,
@@ -111,6 +168,9 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para suscribirse a evento userUpdated
+   */
   userUpdatedSubscribeToMore () {
     this.usersQuery.subscribeToMore({
       document: USERS_UPDATED_SUBSCRIPTION,
@@ -118,6 +178,9 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para suscribirse a evento userDeleted
+   */
   userDeletedSubscribeToMore () {
     this.usersQuery.subscribeToMore({
       document: USER_DELETED_SUBSCRIPTION,

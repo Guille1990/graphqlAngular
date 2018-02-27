@@ -629,19 +629,27 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ListComponent } from &#x27;./components/list/list.component&#x27;;
 import { CrudRouterModule } from &#x27;./crud-router/crud-router.module&#x27;;
 import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-import { ApolloModule, Apollo } from &#x27;apollo-angular&#x27;;
-import { HttpLinkModule, HttpLink } from &#x27;apollo-angular-link-http&#x27;;
-import { InMemoryCache } from &#x27;apollo-cache-inmemory&#x27;;
 import { MaterialExportModule } from &#x27;../material-export/material-export.module&#x27;;
 import { FormComponent } from &#x27;./components/form/form.component&#x27;;
 import { ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { Ng2Rut } from &#x27;ng2-rut&#x27;;
 import { SpinnerService } from &#x27;./services/spinner.service&#x27;;
 import { SpinnerComponent } from &#x27;./components/spinner/spinner.component&#x27;;
+import { DialogComponent } from &#x27;./components/dialog/dialog.component&#x27;;
+
+/**
+ * Utilidades de apollo
+ */
+import { ApolloModule, Apollo } from &#x27;apollo-angular&#x27;;
+/**
+ * HttpLinkModule ayuda a hacer consultas de manera sencilla a un servicio GraphQL,
+ * Internamente utiliza HttpClient
+ */
+import { HttpLinkModule, HttpLink } from &#x27;apollo-angular-link-http&#x27;;
+import { InMemoryCache } from &#x27;apollo-cache-inmemory&#x27;;
 import { WebSocketLink } from &#x27;apollo-link-ws&#x27;;
 import { split } from &#x27;apollo-link&#x27;;
 import { getMainDefinition } from &#x27;apollo-utilities&#x27;;
-import { DialogComponent } from &#x27;./components/dialog/dialog.component&#x27;;
 
 @NgModule({
   imports: [
@@ -670,14 +678,28 @@ import { DialogComponent } from &#x27;./components/dialog/dialog.component&#x27;
   ]
 })
 export class CrudModule {
+  /**
+   * Injección de dependencias
+   * @param apollo
+   * @param httpLink
+   *
+   * Se deben injectar las dependencias y crear un cliente
+   */
   constructor(
     apollo: Apollo,
     httpLink: HttpLink
   ) {
+    /**
+     * Crea el link para consumir el servicio GraphQL
+     */
     const http &#x3D; httpLink.create({
       uri: &#x27;http://localhost:1234/graphql&#x27;
     });
 
+    /**
+     * Crea el link de web socket para consumir suscripciones,
+     * con la opción de re conexión
+     */
     const ws &#x3D; new WebSocketLink({
       uri: &#x27;ws://localhost:1234/subscriptions&#x27;,
       options: {
@@ -694,6 +716,12 @@ export class CrudModule {
       http
     );
 
+    /**
+     * Crea cliente para consumir servicio GraphQL
+     *
+     * InMemoryCache es un store que normaliza los datos antes de guardarlos,
+     * creando un identificador único para cada objeto
+     */
     apollo.create({
       link,
       cache: new InMemoryCache()

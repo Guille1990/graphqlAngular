@@ -1,5 +1,6 @@
 const User = require('../models')
 const { PubSub } = require('graphql-subscriptions')
+const chalk = require('chalk')
 
 const pubsub = new PubSub()
 const USER_ADDED_TOPIC = 'newUser'
@@ -31,19 +32,19 @@ const resolvers = {
   Subscription: {
     userAdded: {
       subscribe: () => {
-        console.log('Entre al evento userAdded')
+        console.log(chalk.green('Subscription userAdded'))
         return pubsub.asyncIterator(USER_ADDED_TOPIC)
       }
     },
     userUpdated: {
       subscribe: () => {
-        console.log('Entre al evento de actualización')
+        console.log(chalk.yellow('Subscription userUpdated'))
         return pubsub.asyncIterator(USER_UPDATED_TOPIC)
       }
     },
     userDeleted: {
       subscribe: () => {
-        console.log('Entre al evento de eliminación')
+        console.log(chalk.red('Subscription userDeleted'))
         return pubsub.asyncIterator(USER_DELETED_TOPIC)
       }
     }

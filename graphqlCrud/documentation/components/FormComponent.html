@@ -554,6 +554,8 @@
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Injección de dependencias</p>
+    </div>
                                 <div>
                                         <b>Parameters :</b>
                                         <table class="params">
@@ -677,12 +679,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/crud/components/form/form.component.ts:180</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/app/crud/components/form/form.component.ts:221</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Método para resetear formulario</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -714,12 +718,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">src/app/crud/components/form/form.component.ts:158</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/crud/components/form/form.component.ts:192</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Método utilizado para obtener a un user por la Id</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -779,7 +785,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/crud/components/form/form.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/crud/components/form/form.component.ts:93</a></div>
                                 </td>
                             </tr>
     
@@ -816,12 +822,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/crud/components/form/form.component.ts:173</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/crud/components/form/form.component.ts:211</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Método para setear valores de formulario</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -885,12 +893,15 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/crud/components/form/form.component.ts:107</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/crud/components/form/form.component.ts:126</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Método que realiza inserción o actualización de
+    objeto User</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1127,6 +1138,15 @@ export class FormComponent implements OnInit {
   public userUpdate: User;
   public dialogRef: MatDialogRef&lt;DialogComponent&gt;;
 
+  /**
+   * Injección de dependencias
+   * @param apollo
+   * @param rv
+   * @param spinnerService
+   * @param router
+   * @param route
+   * @param dialog
+   */
   constructor(
     private apollo: Apollo,
     private rv: RutValidator,
@@ -1137,6 +1157,9 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    /**
+     * Creación de Reactive Forms
+     */
     this.form &#x3D; new FormGroup({
       rutCtrl: new FormControl(&#x27;&#x27;, [
         Validators.required
@@ -1152,6 +1175,9 @@ export class FormComponent implements OnInit {
       ])
     });
 
+    /**
+     * Captura la id del usuario cuando se va a editar el objeto
+     */
     const userId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
 
     if (userId) {
@@ -1159,8 +1185,16 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /**
+   * Método que realiza inserción o actualización de
+   * objeto User
+   */
   submit () {
     this.spinnerService.openSpinner();
+
+    /**
+     * Se arma objeto que se va a insertar
+     */
     this.userAdd &#x3D; {
       rut: this.form.controls[&#x27;rutCtrl&#x27;].value,
       name: this.form.controls[&#x27;nameCtrl&#x27;].value,
@@ -1169,6 +1203,10 @@ export class FormComponent implements OnInit {
     };
 
     const variablesAdd &#x3D; { user: this.userAdd };
+
+    /**
+     * Objeto utilizado para actualizar un usuario
+     */
     let variablesUpdate;
 
     if (this.userUpdate) {
@@ -1182,6 +1220,9 @@ export class FormComponent implements OnInit {
       };
     }
 
+    /**
+     * Mutación que actualiza o inserta objeto.
+     */
     this.apollo.mutate({
       mutation: this.userUpdate ? updateUser : addUser,
       variables: this.userUpdate ? variablesUpdate : variablesAdd,
@@ -1210,6 +1251,10 @@ export class FormComponent implements OnInit {
     );
   }
 
+  /**
+   * Método utilizado para obtener a un user por la Id
+   * @param id
+   */
   getUser (id) {
     this.apollo.watchQuery&lt;any&gt;({
       query: USER_QUERY,
@@ -1225,6 +1270,10 @@ export class FormComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para setear valores de formulario
+   * @param user
+   */
   setFormControl (user: User) {
     this.form.controls[&#x27;rutCtrl&#x27;].setValue(user.rut);
     this.form.controls[&#x27;nameCtrl&#x27;].setValue(user.name);
@@ -1232,6 +1281,9 @@ export class FormComponent implements OnInit {
     this.form.controls[&#x27;mailCtrl&#x27;].setValue(user.mail);
   }
 
+  /**
+   * Método para resetear formulario
+   */
   cleanForm () {
     this.form.reset();
     this.form.markAsUntouched();
