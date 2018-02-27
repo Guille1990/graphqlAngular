@@ -13,17 +13,6 @@ import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
 /**
- * Interfas de tipo de dato User
- */
-export interface User {
-  id: number;
-  rut: string;
-  name: string;
-  lastName: string;
-  mail: string;
-}
-
-/**
  * Query de consulta de usuarios
  */
 const USERS_QUERY = gql`{ users { id, rut, name, lastName, mail } }`;
@@ -106,7 +95,7 @@ export class ListComponent implements OnInit, OnDestroy {
       });
 
     /**
-     * Llamada a métodos de subscrición
+     * Llamada a métodos de suscripción
      */
     this.userAddedSubscribeToMore();
     this.userUpdatedSubscribeToMore();
